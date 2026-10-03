@@ -1,0 +1,8 @@
+# Direct dependencies found in the retained aggregation code.
+# Versions are not a historical lockfile; clean-environment execution is pending.
+numpy
+pandas
+scikit-learn
+rouge_score
+sacrebleu
+bert_score

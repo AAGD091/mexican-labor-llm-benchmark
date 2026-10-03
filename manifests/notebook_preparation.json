@@ -1,0 +1,44 @@
+[
+  {
+    "notebook": "BARE_LLM_Legal_recomm_v1_gold90.ipynb",
+    "source_sha256": "fb23c63d2af7dbe96d6bb769313f06abd8ff30dd160ee6171ff424d5f6b6c798",
+    "upload_sha256": "2e1b3a727da57b39486f070bac20b2ee05bc87fa03fe936ef37fe75f0f49825a",
+    "change": "Outputs and execution metadata removed; cell source preserved",
+    "provenance_status": "Candidate consistent with run schema; exact run-version identity not established"
+  },
+  {
+    "notebook": "RAG_LLM_Legal_recomm_90Golden_v2.ipynb",
+    "source_sha256": "4f04e2ede6f1046b1427cf17d352a1e485ebdfedfe3a9952607e082d22af6ae0",
+    "upload_sha256": "81fc2ee31a6922970917690e00cc5c4cfb86a1011a9a14e6cc0c5ce3a5069d11",
+    "change": "Outputs and execution metadata removed; cell source preserved",
+    "provenance_status": "Candidate consistent with run schema; exact run-version identity not established"
+  },
+  {
+    "notebook": "Graph_RAG_LLM_Legal_90Golden_v3.ipynb",
+    "source_sha256": "f3fcf8f8f687df97feaa3c789e730e93bd7370848896d915dd4c4c06f170d2ff",
+    "upload_sha256": "dc826be39fefa3fa351575062b3f17639fd123e9b727f94e70010cb7efe93907",
+    "change": "Outputs and execution metadata removed; cell source preserved",
+    "provenance_status": "Candidate consistent with run schema; exact run-version identity not established"
+  },
+  {
+    "notebook": "RL_LLM_Legal_recomm_90Golden_v5.ipynb",
+    "source_sha256": "964f0f96754b5078e9d00e873cd3344524e924c31a20df004a0d460693cc1a9f",
+    "upload_sha256": "793933b5d566f06000773d429b3edeb288466c39c4200ade9a74ec3c3e17f605",
+    "change": "Outputs and execution metadata removed; cell source preserved",
+    "provenance_status": "Candidate consistent with run schema; exact run-version identity not established"
+  },
+  {
+    "notebook": "Full Models Benchmark_90Gold_v1.ipynb",
+    "source_sha256": "86a68176c8cf2e0ef27a2c66fa7b8c7d9fca301ad978015b34c83b874853a980",
+    "upload_sha256": "4ea472e1c16b5664b088073f710a9d0eb53b7afc1027d8000be96d079c42506c",
+    "change": "Outputs and execution metadata removed; cell source preserved",
+    "provenance_status": "Candidate consistent with run schema; exact run-version identity not established"
+  },
+  {
+    "notebook": "Freeze_Canonical_Index.ipynb",
+    "source_sha256": "98b3d5dc960ffb766d098be945163dcea0a76d0135672ae58ea6214e75bd186f",
+    "upload_sha256": "1fc11a83efca573a7eba2a65c9ee7b8a9c9e95136791d0d4b45b954a65b8736d",
+    "change": "Outputs and execution metadata removed; cell source preserved",
+    "provenance_status": "Candidate consistent with run schema; exact run-version identity not established"
+  }
+]

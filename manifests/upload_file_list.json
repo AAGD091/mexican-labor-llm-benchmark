@@ -1,0 +1,107 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 87,
+    "sha256": "e9e60bf93b7043dfe5a764e77f299af8484be289bef2612e2ca61763616e6328"
+  },
+  {
+    "path": "docs/AUTHOR_RELEASE_CHECKLIST.md",
+    "bytes": 2122,
+    "sha256": "13eaeaffd773c6e0ced6873467d94fcf896369b9c4254a9487a0f66a73873e73"
+  },
+  {
+    "path": "docs/PROVENANCE.md",
+    "bytes": 2516,
+    "sha256": "1170e90300474110b1c0501660b6e244be0a967f4db3ca40e738f68b0f483063"
+  },
+  {
+    "path": "docs/REPRODUCIBILITY.md",
+    "bytes": 3808,
+    "sha256": "79bd70d96e46309047f1906d77d5f351590c407635e9523771eebd95a19177c6"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+    "path": "LICENSE-DATA.md",
+    "bytes": 1027,
+    "sha256": "e6ff5744c622303b4ef57cfa3e331f81a913edbe27acf5fb34baa10f0067bc4c"
+  },
+  {
+    "path": "manifests/faiss_index_manifest.json",
+    "bytes": 415,
+    "sha256": "3389d60f2acc1411768080d7350cdf59c49b8806d2b68f5fc1400fe724fd5320"
+  },
+  {
+    "path": "manifests/notebook_preparation.json",
+    "bytes": 2623,
+    "sha256": "eee4c0f3f5b80d4c3cb17736448c493fec72f8e1417d8c0909bd95830e49d598"
+  },
+  {
+    "path": "manifests/Verified_Retrieval_Corpus_Manifest.csv",
+    "bytes": 38298,
+    "sha256": "03e91097d6d0b6fb04f8dccc98bb50c6cb6c8c3e0b9757b6359417d12f38c7cd"
+  },
+  {
+    "path": "notebooks/BARE_LLM_Legal_recomm_v1_gold90.ipynb",
+    "bytes": 116659,
+    "sha256": "2e1b3a727da57b39486f070bac20b2ee05bc87fa03fe936ef37fe75f0f49825a"
+  },
+  {
+    "path": "notebooks/Freeze_Canonical_Index.ipynb",
+    "bytes": 1366,
+    "sha256": "1fc11a83efca573a7eba2a65c9ee7b8a9c9e95136791d0d4b45b954a65b8736d"
+  },
+  {
+    "path": "notebooks/Full Models Benchmark_90Gold_v1.ipynb",
+    "bytes": 1560,
+    "sha256": "4ea472e1c16b5664b088073f710a9d0eb53b7afc1027d8000be96d079c42506c"
+  },
+  {
+    "path": "notebooks/Graph_RAG_LLM_Legal_90Golden_v3.ipynb",
+    "bytes": 144908,
+    "sha256": "dc826be39fefa3fa351575062b3f17639fd123e9b727f94e70010cb7efe93907"
+  },
+  {
+    "path": "notebooks/RAG_LLM_Legal_recomm_90Golden_v2.ipynb",
+    "bytes": 123212,
+    "sha256": "81fc2ee31a6922970917690e00cc5c4cfb86a1011a9a14e6cc0c5ce3a5069d11"
+  },
+  {
+    "path": "notebooks/RL_LLM_Legal_recomm_90Golden_v5.ipynb",
+    "bytes": 149437,
+    "sha256": "793933b5d566f06000773d429b3edeb288466c39c4200ade9a74ec3c3e17f605"
+  },
+  {
+    "path": "NOTICE",
+    "bytes": 382,
+    "sha256": "d28dcadd542614881670f67c3d97cda677e7417b104694b6b55e42367efff1cd"
+  },
+  {
+    "path": "README.md",
+    "bytes": 3387,
+    "sha256": "668ce9833868dbdb2fda4d5615e35198d5cd84cf7c6198c580b443c9be729a87"
+  },
+  {
+    "path": "requirements-aggregation.txt",
+    "bytes": 211,
+    "sha256": "9d5b931b2a6932938ccc8a8f5235ac9d45c742d9e103590f99a419e61ea0f7b9"
+  },
+  {
+    "path": "src/crossmodel_v3_draft.py",
+    "bytes": 14728,
+    "sha256": "2c399178aa13d3c3b89db50f85d3e01735575b8765804b5a96e368aaa84d40b5"
+  },
+  {
+    "path": "src/index_manifest.py",
+    "bytes": 6829,
+    "sha256": "c3cbfb882dd8a1e5db0ac8595148d6173cc47341cab7fea513cb786ad88e6237"
+  },
+  {
+    "path": "src/norm.py",
+    "bytes": 3191,
+    "sha256": "1ca73a7b56f4277b21a30ff07880c87046f89959a3bcefd7382bb8df174a3213"
+  }
+]
