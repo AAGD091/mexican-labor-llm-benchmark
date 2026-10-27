@@ -208,9 +208,16 @@ def main():
                 a, b, c = prf(ps, gs); P.append(a); R.append(b); F.append(c)
 
             # Process metric: generations terminating exactly at the token
-            # ceiling are truncated. Reported per condition (see paper §8.4).
+            # ceiling are truncated. Reported per condition (paper Section 4.4).
+            # Revision 1.1 (reviewer R2-3): a missing completion_tokens value is
+            # NOT evidence of a complete output. If any record of a condition
+            # lacks token metadata (the A4 checkpoints store none), truncation
+            # is reported as not measured (None -> "n.m.") instead of 0.
             _ct = [ (r.get("row") or {}).get("completion_tokens") for r in recs ]
-            _trunc = int(sum(1 for v in _ct if v == GEN_CEILING))
+            if any(v is None for v in _ct):
+                _trunc = None
+            else:
+                _trunc = int(sum(1 for v in _ct if v == GEN_CEILING))
 
             # Provenance: the fixed judge must be identical in every condition.
             # A condition whose rubric artifact names a different judge is not
@@ -310,9 +317,11 @@ def main():
     else:
         print(f"  \u274c judge DIFFERS across conditions: {judges}")
         print("     Conditions with a non-matching judge are NOT comparable.")
-    tot_trunc = int(df["trunc_at_ceiling"].sum()); tot_n = int(df["N"].sum())
+    _meas = df[df["trunc_at_ceiling"].notna()]
+    tot_trunc = int(_meas["trunc_at_ceiling"].sum()); tot_n = int(_meas["N"].sum())
     print(f"  generations at the {GEN_CEILING}-token ceiling: {tot_trunc}/{tot_n} "
-          f"({100*tot_trunc/max(tot_n,1):.1f}%)")
+          f"({100*tot_trunc/max(tot_n,1):.1f}%) over conditions with token metadata; "
+          f"{int(df['trunc_at_ceiling'].isna().sum())} condition(s) not measured (n.m.)")
     print(f"  extraction failures (unparseable decision): {int(df['empty_pred'].sum())}/{tot_n}")
 
     print(f"\nSaved → {OUT_DIR}/draft_benchmark_table.csv")

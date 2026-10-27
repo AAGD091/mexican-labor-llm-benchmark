@@ -13,7 +13,7 @@ Thirty-five original PDFs dated September 24, 2026, and a duplicate copy were ex
 | Material | Proposed treatment |
 |---|---|
 | Original research code | Apache-2.0 approved by authors |
-| Original benchmark scenarios and annotations | CC BY 4.0 approved by authors; validation procedures still require documentation |
+| Original benchmark scenarios and annotations | CC BY 4.0 approved by authors; written by two practising attorneys (separate cases, assignment not recorded); no written protocol, double annotation or agreement statistic (documented 2026-10-21) |
 | Original documentation | CC BY 4.0 approved by authors |
 | Generated outputs and evaluation results | Review release rights, embedded quotations, and model terms; document scope separately |
 | SCJN resolutions and statutory texts | Third-party materials; verify their applicable terms and provide attribution and official sources |
