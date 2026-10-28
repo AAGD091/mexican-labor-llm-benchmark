@@ -17,7 +17,8 @@ Sections
 
 Output files are named after the table numbers of the REVISED manuscript:
   table16_pooled_mcnemar.csv, table17_case_clustered_mde_tost.csv,
-  table18_pooled_wilcoxon_articleF1.csv, table23_accuracy_by_batch_class.csv,
+  table18_pooled_wilcoxon_articleF1.csv, table18_case_level_articleF1.csv,
+  table23_accuracy_by_batch_class.csv,
   truncation_by_condition.csv, revision_reanalysis.json.
   2. Case-clustered reanalysis (unit = case; mean over 5 backbones).
   3. Minimum detectable effect and TOST equivalence (margin +/-5 pp).
@@ -190,6 +191,23 @@ def main():
     for r, ph in zip(cc, holm([r["tost_p"] for r in cc])): r["tost_p_holm"] = ph
     R["case_clustered"] = cc
 
+    # 2b. Article-F1 contrasts with the case as unit (added 27 Oct 2026 for R2-4):
+    # per-case mean article-F1 over the 5 backbones (n = 90), Wilcoxon signed-rank + Holm,
+    # case bootstrap. Separate generator so that all other outputs are unchanged.
+    rng_f1 = np.random.default_rng(SEED)
+    def case_f1(arm):
+        return np.array([np.mean([F[(arm, m, c)] for m in models]) for c in cases])
+    cf = []
+    for i, j in PAIRS:
+        d = case_f1(ARMS[j]) - case_f1(ARMS[i]); n = len(d)
+        w = stats.wilcoxon(d).pvalue if np.any(d != 0) else 1.0
+        bs = d[rng_f1.integers(0, n, (B, n))].mean(1)
+        cf.append(dict(contrast=f"{SHORT[ARMS[i]]}->{SHORT[ARMS[j]]}", n_cases=n,
+                       mean_A=case_f1(ARMS[i]).mean(), mean_B=case_f1(ARMS[j]).mean(), delta=d.mean(),
+                       boot95_lo=np.percentile(bs, 2.5), boot95_hi=np.percentile(bs, 97.5), wilcoxon_p=w))
+    for r, ph in zip(cf, holm([r["wilcoxon_p"] for r in cf])): r["wilcoxon_p_holm"] = ph
+    R["case_level_article_f1"] = cf
+
     # ---------------------------------------------------------------- 4. truncation and token metadata
     trunc = []; acc_tr = Counter(); n_tr = Counter()
     for arm in ARMS:
@@ -275,6 +293,7 @@ def main():
     pd.DataFrame(t15).to_csv(os.path.join(a.out, "table16_pooled_mcnemar.csv"), index=False)
     pd.DataFrame(t16).to_csv(os.path.join(a.out, "table18_pooled_wilcoxon_articleF1.csv"), index=False)
     pd.DataFrame(cc).to_csv(os.path.join(a.out, "table17_case_clustered_mde_tost.csv"), index=False)
+    pd.DataFrame(R["case_level_article_f1"]).to_csv(os.path.join(a.out, "table18_case_level_articleF1.csv"), index=False)
     print(json.dumps(R, indent=1, default=float)[:200], "...\nwritten to", a.out)
 
 
