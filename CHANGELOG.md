@@ -2,6 +2,9 @@
 
 ## [1.1] — 2026-10-21 (revision in response to peer review, MDPI *Applied Sciences*)
 
+### Amendment of 27 October 2026
+- `src/revision_reanalysis.py` (reviewer R2-4): the article-F1 contrasts are also repeated with the case as the unit of analysis (per-case mean over the five backbones, n = 90; Wilcoxon signed-rank, Holm; case bootstrap B = 5000, seed 42, separate generator). New output `revision/outputs/table18_case_level_articleF1.csv` and JSON key `case_level_article_f1`. Re-executed: all previously released outputs are byte-identical.
+
 ### Amendment of 22 October 2026 (before release)
 - `src/crossmodel_v3_draft.py` (reviewer R2-3): missing `completion_tokens` is no longer counted as a complete output. Conditions without token metadata (the five A4 conditions) now report truncation as not measured instead of 0. Re-executed on the 20 saved checkpoints: all other aggregate columns are unchanged and match Table 14 of the revised manuscript.
 - `src/revision_reanalysis.py`: output files and JSON keys renamed to the table numbers of the revised manuscript (`table16_pooled_mcnemar`, `table17_case_clustered_mde_tost`, `table18_pooled_wilcoxon_articleF1`, `table23_accuracy_by_batch_class`). Re-executed: every value is identical to the 21 October outputs.
