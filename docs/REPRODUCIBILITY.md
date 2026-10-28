@@ -48,6 +48,7 @@ Dependencies: numpy, pandas, scipy, scikit-learn, statsmodels. Bootstrap seed 42
 | `table16_pooled_mcnemar.csv` | Table 16 | Table 15 |
 | `table17_case_clustered_mde_tost.csv` | Table 17 (new) | — |
 | `table18_pooled_wilcoxon_articleF1.csv` | Table 18 | Table 16 |
+| `table18_case_level_articleF1.csv` | Section 6.3.2 (case as unit; added 27 Oct 2026) | — |
 | `table23_accuracy_by_batch_class.csv` | Table 23 (new) | — |
 | `truncation_by_condition.csv` | Section 4.4, Table 14 (Trunc.) | Section 4.4 |
 | `revision_reanalysis.json` | all of the above, plus the Friedman test, binomial tests, mixed-model LR test and AIC (Section 6.3.3), batch separability (Section 6.7) and A4 diagnostics (Section 6.4) | — |
