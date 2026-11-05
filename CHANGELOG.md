@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2] — 2026-11-05 (second revision, MDPI *Applied Sciences*, round 2 of review)
+
+Reviewer 2 asked that the analyses with the case as the unit of analysis (n = 90) be the primary evidence and that the tests treating the 450 case–backbone pairs as independent be kept as supplementary comparisons. The saved study outputs (checkpoints, per-case table, Hugging Face data) are unchanged.
+
+### Correction
+- `src/revision_reanalysis.py`, `src/sensitivity_exclude_cases.py`: per-case means over the five backbones are rounded to 10 decimals before the Wilcoxon signed-rank tests (`ROUND = 10`). Without rounding, floating-point residues of about 1e-17 remained where two arms are equal for a case, and the test, which drops only exact zeros, counted them as differences. Values that changed: decision-correctness case-level contrasts (`table17_case_clustered_mde_tost.csv`): all six unadjusted Wilcoxon p-values, and A2→A3 pHolm 0.612 → 0.729; case-level article-F1 (`table18_case_level_articleF1.csv`): A1→A3 pHolm 5.66e-7 → 5.85e-7 and A2→A3 pHolm 0.972 → 0.950; sensitivity analysis (n = 88): unadjusted p-values and A2→A3 pHolm 0.436 → 0.428. All other changed values (means, differences, bootstrap limits, TOST p-values) differ by less than 1e-11. No conclusion changes.
+
+### Additions
+- `src/revision_reanalysis.py`: matched-pairs rank-biserial correlation for the case-level article-F1 contrasts (`rank_biserial`); Friedman test on the per-case means (`friedman_article_f1_case_level`: χ² = 129.24, p = 7.9e-28); case-level Spearman correlation between the A4 reward and own-gold article-F1 (`a4_diagnostics.spearman_reward_vs_own_gold_f1_case_level`: ρ = −0.008, p = 0.94, n = 90).
+- `src/sensitivity_exclude_cases.py`: the same case-level article-F1 contrasts and Friedman test without PRED-020 and PRED-051 (n = 88; χ² = 124.83, p = 7.0e-27; A2→A3 pHolm = 0.950); new output `sensitivity_excl_PRED020_051/sens_case_level_articleF1.csv`.
+- `src/figures/make_diagrams.py`: Figure 1 (stacked layout, larger text; Inference block lists the case-level analyses first and the pooled tests in Appendix E; C1/C2 annotated with case-level Holm p-values and rank-biserial correlations) and Figure 2 (larger text; box 6 lists the case-level analyses and "pooled tests: Appendix E").
+- `src/figures/make_figure_a5.py`: panel (b) case-level Holm p-values; panel (g) matched-pairs rank-biserial correlation on case-mean article-F1 (n = 90) instead of Cliff's δ on the 450 pooled rows; panel (f) titled "all backbones"; smaller canvas for larger printed text.
+- `revision/outputs/`: all outputs regenerated with the scripts of this version. Unchanged files are byte-identical; `docs/REPRODUCIBILITY.md` maps the file names to the round-2 table numbers.
+
 ## [1.1] — 2026-10-21 (revision in response to peer review, MDPI *Applied Sciences*)
 
 ### Amendment of 27 October 2026

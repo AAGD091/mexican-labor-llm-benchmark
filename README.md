@@ -28,7 +28,7 @@ src/
   crossmodel_v3_draft.py           aggregate tables (Table 14)
   norm.py                          citation normalizer
   index_manifest.py                frozen-index manifest checks
-  revision_reanalysis.py           inferential analyses (Tables 16-18, 23; mixed-model LR test)
+  revision_reanalysis.py           inferential analyses (Tables 16, 17, 22, A3, A4; mixed-model LR test)
   sensitivity_exclude_cases.py     sensitivity analysis without PRED-020 and PRED-051 (Section 8.1)
   figures/
     make_diagrams.py               Figures 1 and 2
