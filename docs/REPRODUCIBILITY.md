@@ -34,24 +34,24 @@ The script uses 2000 bootstrap resamples and seed 42. It can process partial inp
 
 ## 3. Recompute the inferential analyses
 
-`src/revision_reanalysis.py` reproduces the pairwise contrasts on decision correctness (pooled exact McNemar, Holm), the Friedman and Wilcoxon tests on article-F1 (Holm, Cliff's δ), and the one-sided binomial tests against the 54.44% majority baseline, and adds the case-clustered analyses, minimum detectable effects, TOST equivalence tests (±5 percentage points), truncation recount, batch analyses and A4 diagnostics.
+`src/revision_reanalysis.py` reproduces the pairwise contrasts on decision correctness (pooled exact McNemar, Holm), the Friedman and Wilcoxon tests on article-F1 (Holm, Cliff's δ), and the one-sided binomial tests against the 54.44% majority baseline, and adds the case-clustered analyses, minimum detectable effects, TOST equivalence tests (±5 percentage points), truncation recount, batch analyses and A4 diagnostics. Since version 1.2 (round 2 of review) the case is the primary unit of analysis: the article-F1 contrasts are also reported on per-case means over the five backbones (n = 90) with the matched-pairs rank-biserial correlation, a Friedman test on the case means, and a case-level Spearman correlation for the A4 reward; the tests that treat the 450 case–backbone pairs as independent are kept as the pre-specified pooled analyses (Appendix E of the manuscript).
 
 ```bash
 python src/revision_reanalysis.py --long results/_benchmark_final/draft_per_case_long.csv \
   --results results --gold results/gold_prediction_90_compatible.json --out revision/outputs
 ```
 
-Dependencies: numpy, pandas, scipy, scikit-learn, statsmodels. Bootstrap seed 42 (B = 5000). The mixed logistic model is fitted by maximum likelihood with Gauss–Hermite quadrature (100 nodes); the likelihood-ratio statistic is stable from 50 to 150 nodes. Outputs used in the revised manuscript are in `revision/outputs/`. File names follow the table numbers of the revised manuscript:
+Dependencies: numpy, pandas, scipy, scikit-learn, statsmodels. Bootstrap seed 42 (B = 5000). The mixed logistic model is fitted by maximum likelihood with Gauss–Hermite quadrature (100 nodes); the likelihood-ratio statistic is stable from 50 to 150 nodes. Outputs used in the revised manuscript are in `revision/outputs/`. File names follow the table numbers of the first revised manuscript (round 1) and are kept unchanged; the second revision (round 2) renumbered the tables:
 
-| File | Revised manuscript | Submitted manuscript |
-|---|---|---|
-| `table16_pooled_mcnemar.csv` | Table 16 | Table 15 |
-| `table17_case_clustered_mde_tost.csv` | Table 17 (new) | — |
-| `table18_pooled_wilcoxon_articleF1.csv` | Table 18 | Table 16 |
-| `table18_case_level_articleF1.csv` | Section 6.3.2 (case as unit; added 27 Oct 2026) | — |
-| `table23_accuracy_by_batch_class.csv` | Table 23 (new) | — |
-| `truncation_by_condition.csv` | Section 4.4, Table 14 (Trunc.) | Section 4.4 |
-| `revision_reanalysis.json` | all of the above, plus the Friedman test, binomial tests, mixed-model LR test and AIC (Section 6.3.3), batch separability (Section 6.7) and A4 diagnostics (Section 6.4) | — |
+| File | Second revision (round 2) | First revision (round 1) | Submitted manuscript |
+|---|---|---|---|
+| `table16_pooled_mcnemar.csv` | Table A3 (Appendix E, pooled) | Table 16 | Table 15 |
+| `table17_case_clustered_mde_tost.csv` | Table 16 | Table 17 (new) | — |
+| `table18_case_level_articleF1.csv` | Table 17 | Section 6.3.2 (added 27 Oct 2026) | — |
+| `table18_pooled_wilcoxon_articleF1.csv` | Table A4 (Appendix E, pooled) | Table 18 | Table 16 |
+| `table23_accuracy_by_batch_class.csv` | Table 22 | Table 23 (new) | — |
+| `truncation_by_condition.csv` | Section 4.4, Table 14 (Trunc.) | Section 4.4, Table 14 | Section 4.4 |
+| `revision_reanalysis.json` | all of the above, plus the pooled and case-level Friedman tests, binomial tests, mixed-model LR test and AIC (Section 6.3.3), batch separability (Section 6.7) and A4 diagnostics including the case-level Spearman correlation (Section 6.4) | | — |
 
 ### Sensitivity analysis (cases whose text names the gold label)
 
