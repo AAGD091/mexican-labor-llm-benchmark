@@ -44,6 +44,7 @@ import pandas as pd
 from scipy import stats, optimize
 from scipy.special import expit, logsumexp
 
+ROUND = 10  # decimals for case-level means/differences (round-2 fix)
 ARMS = ["Bare LLM", "RAG+LLM", "GraphRAG+LLM", "RL+LLM"]
 SHORT = {"Bare LLM": "A1", "RAG+LLM": "A2", "GraphRAG+LLM": "A3", "RL+LLM": "A4"}
 PAIRS = [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
@@ -185,10 +186,12 @@ def main():
 
     # ---------------------------------------------------------------- 2./3. case-clustered, MDE, TOST
     def case_means(arm, ids=cases):
-        return np.array([np.mean([C[(arm, m, c)] for m in models]) for c in ids])
+        # Round-2 fix (4 Nov 2026): averaging over backbones leaves floating-point residues (~1e-17)
+        # where two arms are equal; the Wilcoxon test drops exact zeros only. Round to 10 decimals.
+        return np.round(np.array([np.mean([C[(arm, m, c)] for m in models]) for c in ids]), ROUND)
     cc = []
     for i, j in PAIRS:
-        d = case_means(ARMS[j]) - case_means(ARMS[i]); n = len(d); sd = d.std(ddof=1); se = sd / math.sqrt(n)
+        d = np.round(case_means(ARMS[j]) - case_means(ARMS[i]), ROUND); n = len(d); sd = d.std(ddof=1); se = sd / math.sqrt(n)
         w = stats.wilcoxon(d).pvalue if np.any(d != 0) else 1.0
         bs = d[rng.integers(0, n, (B, n))].mean(1)
         tcrit = stats.t.ppf(0.975, n - 1); mde = (tcrit + stats.t.ppf(0.80, n - 1)) * se
@@ -203,11 +206,32 @@ def main():
     for r, ph in zip(cc, holm([r["wilcoxon_p"] for r in cc])): r["wilcoxon_p_holm"] = ph
     for r, ph in zip(cc, holm([r["tost_p"] for r in cc])): r["tost_p_holm"] = ph
     R["case_clustered"] = cc
+    # Round-2 addition (4 Nov 2026): article-F1 contrasts with the case as unit (same code as
+    # revision_reanalysis.py block 2b): Friedman on case means, Wilcoxon + Holm, case bootstrap, rank-biserial.
+    rng_f1 = np.random.default_rng(SEED)
+    def case_f1(arm):
+        return np.round(np.array([np.mean([F[(arm, m, c)] for m in models]) for c in cases]), ROUND)
+    cf = []
+    for i, j in PAIRS:
+        d = np.round(case_f1(ARMS[j]) - case_f1(ARMS[i]), ROUND); n = len(d)
+        w = stats.wilcoxon(d).pvalue if np.any(d != 0) else 1.0
+        bs = d[rng_f1.integers(0, n, (B, n))].mean(1)
+        nz = d[d != 0]; rk = stats.rankdata(np.abs(nz))
+        rb = float((rk[nz > 0].sum() - rk[nz < 0].sum()) / rk.sum()) if nz.size else 0.0
+        cf.append(dict(contrast=f"{SHORT[ARMS[i]]}->{SHORT[ARMS[j]]}", n_cases=n,
+                       mean_A=case_f1(ARMS[i]).mean(), mean_B=case_f1(ARMS[j]).mean(), delta=d.mean(),
+                       boot95_lo=np.percentile(bs, 2.5), boot95_hi=np.percentile(bs, 97.5), wilcoxon_p=w,
+                       rank_biserial=rb))
+    for r, ph in zip(cf, holm([r["wilcoxon_p"] for r in cf])): r["wilcoxon_p_holm"] = ph
+    R["case_level_article_f1"] = cf
+    fr_case = stats.friedmanchisquare(*[case_f1(arm) for arm in ARMS])
+    R["friedman_article_f1_case_level"] = dict(chi2=fr_case.statistic, p=fr_case.pvalue, n=len(cases))
     with open(os.path.join(a.out, "sensitivity_reanalysis.json"), "w", encoding="utf-8") as f:
         json.dump(R, f, indent=2, default=float, ensure_ascii=False)
     pd.DataFrame(t15).to_csv(os.path.join(a.out, "sens_pooled_mcnemar.csv"), index=False)
     pd.DataFrame(t16).to_csv(os.path.join(a.out, "sens_pooled_wilcoxon_articleF1.csv"), index=False)
     pd.DataFrame(cc).to_csv(os.path.join(a.out, "sens_case_clustered_mde_tost.csv"), index=False)
+    pd.DataFrame(cf).to_csv(os.path.join(a.out, "sens_case_level_articleF1.csv"), index=False)
     print("written to", a.out)
     return
 
@@ -257,7 +281,7 @@ def main():
     wb = []
     for name, ids in [("PRED-001-060", base), ("PRED-061-090", ext)]:
         for i, j in PAIRS:
-            d = case_means(ARMS[j], ids) - case_means(ARMS[i], ids)
+            d = np.round(case_means(ARMS[j], ids) - case_means(ARMS[i], ids), ROUND)
             bs = d[rng.integers(0, len(d), (B, len(d)))].mean(1)
             wb.append(dict(batch=name, contrast=f"{SHORT[ARMS[i]]}->{SHORT[ARMS[j]]}", delta_pp=100 * d.mean(),
                            boot95_lo=100 * np.percentile(bs, 2.5), boot95_hi=100 * np.percentile(bs, 97.5)))
