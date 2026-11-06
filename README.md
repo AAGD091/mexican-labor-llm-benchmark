@@ -8,7 +8,7 @@ Controlled comparison of four language-model architectures across five quantized
 - Four arms: parametric-only generation, RAG, GraphRAG, and reward-guided best-of-5 selection with guarded revision.
 - Five candidate configurations: Llama 3.1 8B Q4_K_M and Q8_0; Qwen2.5 7B, Mistral 7B Instruct v0.3, and Gemma 2 9B at Q4_K_M.
 - Phi 3.5 Mini Instruct Q4_K_M is the independent automated judge.
-- 20 conditions and 1800 case-level observations.
+- 20 conditions and 1800 case–condition observations (90 cases × 20 conditions).
 - Retrieval corpus: 321 SCJN resolutions (2013–2014) and nine Mexican statutory documents, totaling 330 PDFs. The indexed court documents total 8747 pages.
 
 This documentation was prepared from retained notebooks, checkpoints, source metadata, and saved outputs. It does not represent a fresh execution of the experiments.

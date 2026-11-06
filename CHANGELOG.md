@@ -14,6 +14,9 @@ Reviewer 2 asked that the analyses with the case as the unit of analysis (n = 90
 - `src/figures/make_figure_a5.py`: panel (b) case-level Holm p-values; panel (g) matched-pairs rank-biserial correlation on case-mean article-F1 (n = 90) instead of Cliff's δ on the 450 pooled rows; panel (f) titled "all backbones"; smaller canvas for larger printed text.
 - `revision/outputs/`: all outputs regenerated with the scripts of this version. Unchanged files are byte-identical; `docs/REPRODUCIBILITY.md` maps the file names to the round-2 table numbers.
 
+### Amendment — 2026-11-06
+- Terminology: the 1,800 records (90 cases × 20 conditions) are now called "case–condition observations" (Figure 2, Figure A5 subtitle, README), because "case level" denotes the analyses with the case as the unit of analysis (n = 90). Figure text only; no analysis or output changed.
+
 ## [1.1] — 2026-10-21 (revision in response to peer review, MDPI *Applied Sciences*)
 
 ### Amendment of 27 October 2026
