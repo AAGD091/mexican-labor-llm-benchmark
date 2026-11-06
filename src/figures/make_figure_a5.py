@@ -71,7 +71,7 @@ def main():
     fig, ax = plt.subplots(3, 3, figsize=(13.5, 14.5))  # round 2: smaller canvas = larger printed text
     plt.subplots_adjust(hspace=0.62, wspace=0.42, top=0.875, bottom=0.055, left=0.075, right=0.99)
     fig.suptitle("Ablation results across the contextual-broadening ladder", fontsize=19, fontweight="bold", color="#1f2f57")
-    fig.text(0.5, 0.925, "4 arms × 5 quantized backbones × 90 cases = 1,800 case-level observations\n"
+    fig.text(0.5, 0.925, "4 arms × 5 quantized backbones × 90 cases = 1,800 case–condition observations\n"
              "C1 retrieval  ·  C2 graph  ·  C3 exemplars + selection (not separable)",
              ha="center", fontsize=13, style="italic", color="#444")
 

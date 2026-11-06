@@ -222,7 +222,7 @@ def figure2(path, box6=FIG2_BOX6):
     box(ax, 4, 1, 192, 31.5, "white", "#aab", 1.8)
     txt2(ax, W/2, 29.3, "OUTPUTS", 13, NAVY, "bold")
     out = [("90-case gold benchmark", "#1b5e20", "49 / 26 / 15 · baseline 54.4% · two batches · no double annotation"),
-           ("20-condition results table", "#2f5597", "1,800 case-level observations · 3 metric tiers + process metrics"),
+           ("20-condition results table", "#2f5597", "1,800 case–condition observations · 3 metric tiers + process metrics"),
            ("Correction register", "#b8860b", "13 documented failure modes with corrective procedures"),
            ("Reproducibility package", "#7b68b0", "run-provenance map · checksums · per-case outputs · analysis scripts")]
     for i, (t, c, b) in enumerate(out):
